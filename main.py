@@ -12,6 +12,7 @@ from tensorflow.keras.layers import Dense, Conv2D, Conv2DTranspose
 from tensorflow.keras.layers import Flatten, Reshape, Dropout, BatchNormalization, Activation, LeakyReLU
 from tensorflow.keras.models import Model
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.callbacks import ModelCheckpoint
 from keras.utils.vis_utils import plot_model
 
 AUTOTUNE = tf.data.AUTOTUNE
@@ -410,3 +411,20 @@ class VAE(keras.Model):
 
 vae = VAE(r_loss_factor=R_LOSS_FACTOR, summary=True)
 vae.summary()
+vae.compile(optimizer=keras.optimizers.Adam())
+
+filepath = 'best_weight_model.h5'
+checkpoint = ModelCheckpoint(filepath=filepath,
+                             monitor='loss',
+                             verbose=1,
+                             save_best_only=True,
+                             save_weights_only=True,
+                             mode='min')
+callbacks = [checkpoint]
+vae.fit([Dtf, Ztf],
+        batch_size      = BATCH_SIZE,
+        epochs          = EPOCHS,
+        initial_epoch   = INITIAL_EPOCH,
+        steps_per_epoch = steps_per_epoch,
+        callbacks       = callbacks)
+vae.save_weights("final_weights_model.h5")
