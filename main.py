@@ -106,3 +106,21 @@ def display_images(fname, dogs_imgs=None, cats_imgs=None, rows=3, offset=0):
   plt.savefig(fname)
 
 display_images("figure_1.png", dogs_imgs, cats_imgs, rows=3)
+
+# Dataset's configuration
+idx = int(BUFFER_SIZE*.8)
+
+train_dogs = tf.data.Dataset.list_files(train_dogs_files[:idx], shuffle=False)
+train_cats = tf.data.Dataset.list_files(train_cats_files[:idx], shuffle=False)
+
+test1_dogs = tf.data.Dataset.list_files(train_dogs_files[idx:], shuffle=False)
+test1_cats = tf.data.Dataset.list_files(train_cats_files[idx:], shuffle=False)
+
+train_dogs_dataset = train_dogs.cache().map(load_image, num_parallel_calls=tf.data.AUTOTUNE).shuffle(buffer_size=idx).batch(BATCH_SIZE)
+train_cats_dataset = train_cats.cache().map(load_image, num_parallel_calls=tf.data.AUTOTUNE).shuffle(buffer_size=idx).batch(BATCH_SIZE)
+test1_dogs_dataset = test1_dogs.cache().map(load_image, num_parallel_calls=tf.data.AUTOTUNE).batch(BATCH_SIZE)
+test1_cats_dataset = test1_cats.cache().map(load_image, num_parallel_calls=tf.data.AUTOTUNE).batch(BATCH_SIZE)
+
+sample_dog = next(iter(train_dogs_dataset))
+sample_cat = next(iter(train_cats_dataset))
+print(f"Sample image shape {sample_dog[0].shape}")
