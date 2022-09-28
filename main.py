@@ -332,7 +332,7 @@ for dog_file, cat_file in zip(train_dogs_files[:5], train_cats_files[:5]):
   print(dog_file, cat_file)
 
 BUFFER_SIZE      = len(train_cats_files)
-steps_per_epoch  = BUFFER_SIZE // BATCH_SIZE
+steps_per_epoch  = BUFFER_SIZE // BATCH_SIZE // EPOCHS
 print('num image files : ', BUFFER_SIZE)
 print('steps per epoch : ', steps_per_epoch )
 
