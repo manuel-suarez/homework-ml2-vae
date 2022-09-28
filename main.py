@@ -332,7 +332,7 @@ for dog_file, cat_file in zip(train_dogs_files[:5], train_cats_files[:5]):
   print(dog_file, cat_file)
 
 BUFFER_SIZE      = len(train_cats_files)
-steps_per_epoch  = BUFFER_SIZE // BATCH_SIZE // EPOCHS
+steps_per_epoch  = BUFFER_SIZE // BATCH_SIZE
 print('num image files : ', BUFFER_SIZE)
 print('steps per epoch : ', steps_per_epoch )
 
@@ -407,6 +407,7 @@ test_cats = tf.data.Dataset.list_files(train_cats_files[idx:], shuffle=False)
 
 train_dataset = tf.data.Dataset.zip((train_dogs, train_cats))
 train_dataset = train_dataset.shuffle(buffer_size=idx, reshuffle_each_iteration=True)
+train_dataset = train_dataset.repeat(count=-1)
 train_dataset = train_dataset.map(load_images, num_parallel_calls=tf.data.AUTOTUNE)
 train_dataset = train_dataset.batch(BATCH_SIZE)
 
