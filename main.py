@@ -14,7 +14,6 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.models import Sequential
 from tensorflow_examples.models.pix2pix import pix2pix
 from keras.utils.vis_utils import plot_model
-from IPython.display import clear_output
 AUTOTUNE = tf.data.AUTOTUNE
 
 # Generación de los polinomios
