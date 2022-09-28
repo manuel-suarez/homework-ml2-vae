@@ -372,8 +372,7 @@ dogs_imgs = []
 cats_imgs = []
 # Cargamos 3 imagenes
 for i in range(3):
-    dog_img = load_image(train_dogs_files[i])
-    cat_img = load_image(train_cats_files[i])
+    dog_img, cat_img = load_images(train_cats_files[i])
     dogs_imgs.append(dog_img)
     cats_imgs.append(cat_img)
 # Verificamos la forma de las imagenes cargadas
