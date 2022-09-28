@@ -250,15 +250,16 @@ class VAE(keras.Model):
       '''
       '''
       # Desestructuramos data ya que contiene los dos inputs (gradientes, integral)
-      gradients, integral = data[0]
+      dog_input = data[0]
+      cat_input = data[1]
       with tf.GradientTape() as tape:
         # predict
-        x = self.encoder_model(gradients)
+        x = self.encoder_model(dog_input)
         z, z_mean, z_log_var = self.sampler_model(x)
         pred = self.decoder_model(z)
 
         # loss
-        r_loss = self.r_loss_factor * self.mae(integral, pred)
+        r_loss = self.r_loss_factor * self.mae(cat_input, pred)
         kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
         kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
         total_loss = r_loss + kl_loss
