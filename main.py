@@ -188,7 +188,7 @@ class VAE(keras.Model):
       self.r_loss_factor = r_loss_factor
 
       # Architecture
-      self.input_dim = GRADIENT_DIM
+      self.input_dim = INPUT_DIM
       self.latent_dim = LATENT_DIM
       # Utilizamos un número mayor de capas convolucionales para obtener mejor
       # las características del gradiente de entrada
@@ -417,3 +417,23 @@ test_dataset = test_dataset.batch(BATCH_SIZE)
 sample_dog, sample_cat = next(iter(train_dataset))
 print(sample_dog[0].shape, sample_cat[0].shape)
 
+vae = VAE(r_loss_factor=R_LOSS_FACTOR, summary=True)
+vae.summary()
+vae.compile(optimizer=keras.optimizers.Adam())
+from tensorflow.keras.callbacks import ModelCheckpoint
+filepath = 'best_weight_model.h5'
+checkpoint = ModelCheckpoint(filepath=filepath,
+                             monitor='loss',
+                             verbose=1,
+                             save_best_only=True,
+                             save_weights_only=True,
+                             mode='min')
+callbacks = [checkpoint]
+
+vae.fit(train_dataset,
+        batch_size      = BATCH_SIZE,
+        epochs          = EPOCHS,
+        initial_epoch   = INITIAL_EPOCH,
+        steps_per_epoch = steps_per_epoch,
+        callbacks       = callbacks)
+vae.save_weights("final_weights_model.h5")
