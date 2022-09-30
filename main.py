@@ -59,9 +59,9 @@ def read_and_decode(file):
     img = tf.io.read_file(file)
     img = tf.image.decode_jpeg(img)
     img = tf.cast(img, tf.float32)
-    # Normalización
+    # Normalization
     # img = img/127.5 - 1
-    img = img / 255.0
+    # img = img / 255.0
     # Conversión a escala de grises
     img = tf.image.rgb_to_grayscale(img)
     # Redimensionamiento
