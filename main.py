@@ -12,7 +12,7 @@ from tensorflow.keras.layers import Flatten, Reshape, Dropout, BatchNormalizatio
 from tensorflow.keras.models import Model
 from tensorflow.keras.models import Sequential
 from keras.utils.vis_utils import plot_model
-from IPython.display import clear_output
+
 AUTOTUNE = tf.data.AUTOTUNE
 
 BUFFER_SIZE = 1000
@@ -27,7 +27,7 @@ R_LOSS_FACTOR = 1000
 INPUT_DIM     = (IMG_WIDTH, IMG_HEIGHT, OUTPUT_CHANNELS)
 # Dimensión del espacio latente
 LATENT_DIM    = 300
-EPOCHS        = 50
+EPOCHS        = 10
 INITIAL_EPOCH = 0
 
 use_batch_norm  = True
