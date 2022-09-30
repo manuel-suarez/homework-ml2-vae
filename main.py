@@ -22,6 +22,7 @@ IMG_HEIGHT = 64
 
 OUTPUT_CHANNELS = 1
 R_LOSS_FACTOR = 100
+L_LOSS_FACTOR = 1000
 
 # Dimensión de la imagen de entrada (el polinomio) utilizado en el entrenamiento y pruebas
 INPUT_DIM     = (IMG_WIDTH, IMG_HEIGHT, OUTPUT_CHANNELS)
@@ -353,8 +354,8 @@ class VAE(keras.Model):
             pred = self.decoder_model(z)
 
             # loss
-            r_loss = self.r_loss_factor * replacenan(self.mae(cat, pred))
-            kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
+            r_loss = R_LOSS_FACTOR * replacenan(self.mae(cat, pred))
+            kl_loss = L_LOSS_FACTOR * (-0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var)))
             kl_loss = tf.reduce_mean(tf.reduce_sum(replacenan(kl_loss), axis=1))
             total_loss = r_loss + kl_loss
 
