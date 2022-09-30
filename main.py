@@ -94,7 +94,7 @@ for i in range(3):
 print(dogs_imgs[0].shape, cats_imgs[0].shape)
 
 
-def display_images(dogs_imgs=None, cats_imgs=None, rows=3, offset=0):
+def display_images(fname, dogs_imgs=None, cats_imgs=None, rows=3, offset=0):
     '''
     Despliega conjunto de imágenes izquierda y derecha junto a la disparidad
     '''
@@ -107,9 +107,9 @@ def display_images(dogs_imgs=None, cats_imgs=None, rows=3, offset=0):
         ax[i, 1].set_title('Right')
 
     plt.tight_layout()
-    plt.show()
+    plt.savefig(fname)
 
-display_images(dogs_imgs, cats_imgs, rows=3)
+display_images("figure1.png", dogs_imgs, cats_imgs, rows=3)
 
 train_dogs = tf.data.Dataset.list_files(train_dogs_files, shuffle=False)
 train_cats = tf.data.Dataset.list_files(train_cats_files, shuffle=False)
@@ -447,4 +447,4 @@ for data in train_dataset.take(4):
   if n == 4:
     break
 fig.tight_layout()
-plt.show()
+plt.savefig("figure2.png")
