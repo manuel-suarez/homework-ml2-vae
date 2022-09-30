@@ -27,7 +27,7 @@ R_LOSS_FACTOR = 100
 INPUT_DIM     = (IMG_WIDTH, IMG_HEIGHT, OUTPUT_CHANNELS)
 # Dimensión del espacio latente
 LATENT_DIM    = 500
-EPOCHS        = 100
+EPOCHS        = 10
 INITIAL_EPOCH = 0
 
 use_batch_norm  = True
