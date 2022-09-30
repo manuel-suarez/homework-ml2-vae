@@ -27,7 +27,7 @@ R_LOSS_FACTOR = 100
 INPUT_DIM     = (IMG_WIDTH, IMG_HEIGHT, OUTPUT_CHANNELS)
 # Dimensión del espacio latente
 LATENT_DIM    = 2048
-EPOCHS        = 20
+EPOCHS        = 30
 INITIAL_EPOCH = 0
 
 use_batch_norm  = True
@@ -353,7 +353,7 @@ class VAE(keras.Model):
             # loss
             r_loss = self.r_loss_factor * self.mae(cat, pred)
             kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
-            kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
+            kl_loss = tf.reduce_mean(tf.reduce_sum(np.nan_to_num(kl_loss), axis=1))
             total_loss = r_loss + kl_loss
 
         # gradient
