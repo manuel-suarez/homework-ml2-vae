@@ -20,7 +20,7 @@ BATCH_SIZE = 100
 IMG_WIDTH = 64
 IMG_HEIGHT = 64
 
-OUTPUT_CHANNELS = 3
+OUTPUT_CHANNELS = 1
 R_LOSS_FACTOR = 100
 
 # Dimensión de la imagen de entrada (el polinomio) utilizado en el entrenamiento y pruebas
@@ -62,6 +62,8 @@ def read_and_decode(file):
     # Normalización
     # img = img/127.5 - 1
     img = img / 255
+    # Conversión a escala de grises
+    img = tf.image.rgb_to_grayscale(img)
     # Redimensionamiento
     img = tf.image.resize(img, INPUT_DIM[:2],
                           method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
