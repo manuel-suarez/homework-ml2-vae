@@ -273,6 +273,8 @@ class Decoder(keras.Model):
         '''
         return self.model(inputs)
 
+def replacenan(t):
+    return tf.where(tf.is_nan(t), tf.zeros_like(t), t)
 
 class VAE(keras.Model):
     def __init__(self, r_loss_factor=1, summary=False, **kwargs):
@@ -353,7 +355,7 @@ class VAE(keras.Model):
             # loss
             r_loss = self.r_loss_factor * self.mae(cat, pred)
             kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
-            kl_loss = tf.reduce_mean(tf.reduce_sum(np.nan_to_num(kl_loss), axis=1))
+            kl_loss = tf.reduce_mean(tf.reduce_sum(replacenan(kl_loss), axis=1))
             total_loss = r_loss + kl_loss
 
         # gradient
