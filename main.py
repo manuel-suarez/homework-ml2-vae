@@ -188,7 +188,7 @@ class Encoder(keras.Model):
         '''
         '''
         encoder_input = layers.Input(shape=self.input_dim, name='encoder')
-        x = encoder_input
+        x = layers.Rescaling(1.0 / 255)(encoder_input)
 
         for i in range(self.n_layers_encoder):
             x = Conv2D(filters=self.encoder_conv_filters[i],
