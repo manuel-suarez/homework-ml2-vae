@@ -353,7 +353,7 @@ class VAE(keras.Model):
             pred = self.decoder_model(z)
 
             # loss
-            r_loss = self.r_loss_factor * self.mae(cat, pred)
+            r_loss = self.r_loss_factor * replacenan(self.mae(cat, pred))
             kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
             kl_loss = tf.reduce_mean(tf.reduce_sum(replacenan(kl_loss), axis=1))
             total_loss = r_loss + kl_loss
