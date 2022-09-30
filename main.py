@@ -443,7 +443,7 @@ for data in train_dataset.take(4):
   # Desplegamos
   ax[n, 0].imshow(data[0][0])
   ax[n, 0].set_title('Dog')
-  ax[n, 1].imshow(x_decoded[0])
+  ax[n, 1].imshow(x_decoded)
   ax[n, 1].set_title('VAE')
   # ax[i, 2].imshow(pred[0,:,:,0])
   ax[n, 2].imshow(data[1][0])
