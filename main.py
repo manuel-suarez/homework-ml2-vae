@@ -103,9 +103,9 @@ def display_images(fname, dogs_imgs=None, cats_imgs=None, rows=3, offset=0):
     # plt.figure(figsize=(20,rows*2.5))
     fig, ax = plt.subplots(rows, 2, figsize=(8, rows * 2.5))
     for i in range(rows):
-        ax[i, 0].imshow((dogs_imgs[i + offset] + 1) / 2)
+        ax[i, 0].imshow((dogs_imgs[i + offset][:,:,0] + 1) / 2)
         ax[i, 0].set_title('Left')
-        ax[i, 1].imshow((cats_imgs[i + offset] + 1) / 2)
+        ax[i, 1].imshow((cats_imgs[i + offset][:,:,0] + 1) / 2)
         ax[i, 1].set_title('Right')
 
     plt.tight_layout()
