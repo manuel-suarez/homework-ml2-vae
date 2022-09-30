@@ -61,7 +61,7 @@ def read_and_decode(file):
     img = tf.cast(img, tf.float32)
     # Normalización
     # img = img/127.5 - 1
-    img = img / 255
+    img = img / 255.0
     # Conversión a escala de grises
     img = tf.image.rgb_to_grayscale(img)
     # Redimensionamiento
