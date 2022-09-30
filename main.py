@@ -355,8 +355,8 @@ class VAE(keras.Model):
 
             # loss
             r_loss = R_LOSS_FACTOR * replacenan(self.mae(cat, pred))
-            kl_loss = L_LOSS_FACTOR * (-0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var)))
-            kl_loss = tf.reduce_mean(tf.reduce_sum(replacenan(kl_loss), axis=1))
+            kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
+            kl_loss = L_LOSS_FACTOR * (tf.reduce_mean(tf.reduce_sum(replacenan(kl_loss), axis=1)))
             total_loss = r_loss + kl_loss
 
         # gradient
@@ -441,12 +441,12 @@ for data in train_dataset.take(4):
   #digit = x_decoded[0].reshape(digit_size, digit_size)
 
   # Desplegamos
-  ax[n, 0].imshow(data[0])
+  ax[n, 0].imshow(data[0][0])
   ax[n, 0].set_title('Dog')
   ax[n, 1].imshow(x_decoded[0])
   ax[n, 1].set_title('VAE')
   # ax[i, 2].imshow(pred[0,:,:,0])
-  ax[n, 2].imshow(data[1])
+  ax[n, 2].imshow(data[1][0])
   ax[n, 2].set_title('Cat')
   n += 1
   if n == 4:
