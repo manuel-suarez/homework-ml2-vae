@@ -32,9 +32,9 @@ INITIAL_EPOCH = 0
 
 use_batch_norm  = True
 use_dropout     = True
-
-train_dogs_files = glob(os.path.join('train', 'dog.*.jpg'))
-train_cats_files = glob(os.path.join('train', 'cat.*.jpg'))
+local_path = '/home/est_posgrado_manuel.suarez/data/dogs-vs-cats'
+train_dogs_files = glob(os.path.join(local_path, 'train', 'dog.*.jpg'))
+train_cats_files = glob(os.path.join(local_path, 'train', 'cat.*.jpg'))
 train_dogs_files.sort()
 train_cats_files.sort()
 train_dogs_files = np.array(train_dogs_files)
