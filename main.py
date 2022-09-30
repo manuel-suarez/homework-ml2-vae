@@ -26,7 +26,7 @@ R_LOSS_FACTOR = 1000
 # Dimensión de la imagen de entrada (el polinomio) utilizado en el entrenamiento y pruebas
 INPUT_DIM     = (IMG_WIDTH, IMG_HEIGHT, OUTPUT_CHANNELS)
 # Dimensión del espacio latente
-LATENT_DIM    = 150
+LATENT_DIM    = 500
 EPOCHS        = 100
 INITIAL_EPOCH = 0
 
