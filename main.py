@@ -21,7 +21,7 @@ IMG_WIDTH = 256
 IMG_HEIGHT = 256
 
 OUTPUT_CHANNELS = 3
-R_LOSS_FACTOR = 1000
+R_LOSS_FACTOR = 100
 
 # Dimensión de la imagen de entrada (el polinomio) utilizado en el entrenamiento y pruebas
 INPUT_DIM     = (IMG_WIDTH, IMG_HEIGHT, OUTPUT_CHANNELS)
