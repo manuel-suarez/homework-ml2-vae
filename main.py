@@ -26,7 +26,7 @@ R_LOSS_FACTOR = 1000
 # Dimensión de la imagen de entrada (el polinomio) utilizado en el entrenamiento y pruebas
 INPUT_DIM     = (IMG_WIDTH, IMG_HEIGHT, OUTPUT_CHANNELS)
 # Dimensión del espacio latente
-LATENT_DIM    = 300
+LATENT_DIM    = 150
 EPOCHS        = 50
 INITIAL_EPOCH = 0
 
@@ -283,14 +283,14 @@ class VAE(keras.Model):
         self.latent_dim = LATENT_DIM
         # Utilizamos un número mayor de capas convolucionales para obtener mejor
         # las características del gradiente de entrada
-        self.encoder_conv_filters = [64, 64, 64, 64]
-        self.encoder_conv_kernel_size = [3, 3, 3, 3]
-        self.encoder_conv_strides = [2, 2, 2, 2]
+        self.encoder_conv_filters = [64, 64, 64, 64, 64, 64]
+        self.encoder_conv_kernel_size = [3, 3, 3, 3, 3, 3]
+        self.encoder_conv_strides = [2, 2, 2, 2, 2, 2]
         self.n_layers_encoder = len(self.encoder_conv_filters)
 
-        self.decoder_conv_t_filters = [64, 64, 64, OUTPUT_CHANNELS]
-        self.decoder_conv_t_kernel_size = [3, 3, 3, 3]
-        self.decoder_conv_t_strides = [2, 2, 2, 2]
+        self.decoder_conv_t_filters = [64, 64, 64, 64, 64, OUTPUT_CHANNELS]
+        self.decoder_conv_t_kernel_size = [3, 3, 3, 3, 3, 3]
+        self.decoder_conv_t_strides = [2, 2, 2, 2, 2, 2]
         self.n_layers_decoder = len(self.decoder_conv_t_filters)
 
         self.use_batch_norm = True
