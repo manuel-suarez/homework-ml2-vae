@@ -274,7 +274,7 @@ class Decoder(keras.Model):
         return self.model(inputs)
 
 def replacenan(t):
-    return tf.where(tf.is_nan(t), tf.zeros_like(t), t)
+    return tf.where(tf.math.is_nan(t), tf.zeros_like(t), t)
 
 class VAE(keras.Model):
     def __init__(self, r_loss_factor=1, summary=False, **kwargs):
