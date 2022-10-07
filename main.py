@@ -15,12 +15,11 @@ from keras.utils.vis_utils import plot_model
 
 AUTOTUNE = tf.data.AUTOTUNE
 
-BUFFER_SIZE = 1000
-BATCH_SIZE = 100
-IMG_WIDTH = 64
-IMG_HEIGHT = 64
+BATCH_SIZE = 128
+IMG_WIDTH = 256
+IMG_HEIGHT = 256
 
-OUTPUT_CHANNELS = 1
+OUTPUT_CHANNELS = 3
 R_LOSS_FACTOR = 10
 L_LOSS_FACTOR = 10000
 
@@ -423,10 +422,10 @@ checkpoint = ModelCheckpoint(filepath=filepath,
                              mode='min')
 callbacks = [checkpoint]
 vae_g.fit(train_dataset,
-        batch_size      = BATCH_SIZE,
+        # batch_size      = BATCH_SIZE,
         epochs          = EPOCHS,
-        initial_epoch   = INITIAL_EPOCH,
-        steps_per_epoch = steps_per_epoch,
+        # initial_epoch   = INITIAL_EPOCH,
+        # steps_per_epoch = steps_per_epoch,
         callbacks       = callbacks)
 
 vae_g.save_weights("final_weights_model.h5")
